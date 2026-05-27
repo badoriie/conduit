@@ -31,7 +31,7 @@ define GO_BUILD
 	BUILDREV=$$(cd psiphon-tunnel-core && git rev-parse --short HEAD) && \
 	GOVERSION="$$($(GO) version | sed 's/go version //')" && \
 	ALL_TAGS="$(BASE_TAGS)" && \
-	if [ -n "$(2)" ]; then ALL_TAGS="$$ALL_TAGS,$(2)"; fi && \
+	if [ -n "$(2)" ]; then ALL_TAGS="$$ALL_TAGS $(2)"; fi && \
 	echo "Building $(3)/$(4) -> $(1) with tags: $$ALL_TAGS" && \
 	CGO_ENABLED=0 GOOS=$(3) GOARCH=$(4) $(if $(5),GOARM=$(5)) $(if $(6),$(6)) $(GO) build \
 	  -tags "$$ALL_TAGS" \
