@@ -119,7 +119,10 @@ export async function refreshHostedSession(
             await setHostedSessionState(queryClient, input, refreshed);
             return refreshed;
         } catch (error) {
-            if (error instanceof HostedApiRequestError && error.status === 401) {
+            if (
+                error instanceof HostedApiRequestError &&
+                error.status === 401
+            ) {
                 await clearHostedSessionState(queryClient, input);
                 throw new Error("Hosted session expired; please sign in again");
             }
